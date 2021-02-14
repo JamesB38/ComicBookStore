@@ -17,7 +17,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsCustomer ACustomer = new clsCustomer();
         ACustomer.CustomerFullName = txtCustomerFN.Text;
-        ACustomer.CustomerPhoneNumber = txtCustomerPNo.Text;
+        //ACustomer.CustomerPhoneNumber = txtCustomerPNo.Text;
 
         Session["ACustomer"] = ACustomer; 
     
