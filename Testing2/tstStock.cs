@@ -76,5 +76,138 @@ namespace Testing2
             Assert.AreEqual(AnStock.IsBeingRestocked, testData);
         }
 
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsStock AnStock = new clsStock();
+
+            Boolean Found = true;
+
+            Int32 StockID = 2;
+
+            Found = AnStock.Find(StockID);
+
+            Assert.IsTrue(Found);
+
+
+
+        }
+
+        [TestMethod]
+
+        public void TestStockIDFound()
+        {
+            clsStock AnStock = new clsStock();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            Int32 StockID = 21;
+
+            Found = AnStock.Find(StockID);
+
+            if(AnStock.StockID != 21)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+
+        [TestMethod]
+
+        public void TestStockAvailabilityFound()
+        {
+            clsStock AnStock = new clsStock();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            Int32 StockID = 21;
+
+            Found = AnStock.Find(StockID);
+
+            if (AnStock.StockAvailability != 10)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+
+        [TestMethod]
+
+        public void TestStockDescriptionFound()
+        {
+            clsStock AnStock = new clsStock();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            Int32 StockID = 21;
+
+            Found = AnStock.Find(StockID);
+
+            if (AnStock.StockDescription != "King Kong")
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+
+        [TestMethod]
+
+        public void TestStockPriceFound()
+        {
+            clsStock AnStock = new clsStock();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            Int32 StockID = 21;
+
+            Found = AnStock.Find(StockID);
+
+            if (AnStock.StockPrice != 9.99)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+
+        [TestMethod]
+
+        public void TestIsBeingRestockedFound()
+        {
+            clsStock AnStock = new clsStock();
+
+            Boolean Found = false;
+
+            Boolean OK = true;
+
+            Int32 StockID = 21;
+
+            Found = AnStock.Find(StockID);
+
+            if (AnStock.IsBeingRestocked != true)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+
+
     }
 }
