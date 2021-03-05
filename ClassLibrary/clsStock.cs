@@ -76,16 +76,35 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(object stockID)
+        public bool Find(int StockID)
         {
+            clsDataConnection DB = new clsDataConnection();
 
-            mStockID = 21;
-            mStockAvailability = 10;
-            mStockDescription = "King Kong";
-            mStockPrice = 9.99;
-            mIsBeingRestocked = true;
+            DB.AddParameter("@StockID", StockID);
 
-            return true;
+            DB.Execute("sproc_tblStock_FilterByStockID");
+
+            if(DB.Count == 1)
+            {
+                mStockID = Convert.ToInt32(DB.DataTable.Rows[0]["StockID"]);
+                mStockAvailability = Convert.ToInt32(DB.DataTable.Rows[0]["StockAvailability"]);
+                mStockDescription = Convert.ToString(DB.DataTable.Rows[0]["StockDescription"]);
+                mStockPrice = Convert.ToDouble(DB.DataTable.Rows[0]["StockPrice"]);
+                mIsBeingRestocked = Convert.ToBoolean(DB.DataTable.Rows[0]["IsBeingRestocked"]);
+
+                return true;
+                
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public string Valid(string StockAvailability, string StockDescription, string StockPrice)
+        {
+            return "";
         }
     }
 }
