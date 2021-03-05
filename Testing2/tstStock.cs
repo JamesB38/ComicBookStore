@@ -7,6 +7,12 @@ namespace Testing2
     [TestClass]
     public class tstStock
     {
+
+        string StockAvailability = "10";
+        string StockDescription = "King Kong";
+        string StockPrice = "9.99";
+
+
         [TestMethod]
         public void InstanceOk()
         {
@@ -103,11 +109,11 @@ namespace Testing2
 
             Boolean OK = true;
 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
 
             Found = AnStock.Find(StockID);
 
-            if(AnStock.StockID != 21)
+            if(AnStock.StockID != 1)
             {
                 OK = false;
             }
@@ -126,7 +132,7 @@ namespace Testing2
 
             Boolean OK = true;
 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
 
             Found = AnStock.Find(StockID);
 
@@ -149,11 +155,11 @@ namespace Testing2
 
             Boolean OK = true;
 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
 
             Found = AnStock.Find(StockID);
 
-            if (AnStock.StockDescription != "King Kong")
+            if (AnStock.StockDescription != "Demon Days: X-Men #1")
             {
                 OK = false;
             }
@@ -172,11 +178,11 @@ namespace Testing2
 
             Boolean OK = true;
 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
 
             Found = AnStock.Find(StockID);
 
-            if (AnStock.StockPrice != 9.99)
+            if (AnStock.StockPrice != 8.99)
             {
                 OK = false;
             }
@@ -195,7 +201,7 @@ namespace Testing2
 
             Boolean OK = true;
 
-            Int32 StockID = 21;
+            Int32 StockID = 1;
 
             Found = AnStock.Find(StockID);
 
@@ -205,6 +211,20 @@ namespace Testing2
             }
 
             Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+
+        public void ValidMethodOk()
+        {
+            clsStock AnStock = new clsStock();
+
+            string Error = "";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+
         }
 
 
