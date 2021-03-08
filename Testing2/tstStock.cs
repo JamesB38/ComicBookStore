@@ -227,6 +227,282 @@ namespace Testing2
 
         }
 
+        [TestMethod]
+
+        public void StockAvailabilityExtremeMin()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockAvailability = "-100000";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockAvailabilityMinLessOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockAvailability = "-1";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockAvailabilityMin()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockAvailability = "0";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Console.WriteLine(Error);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockAvailabilityMinPlusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockAvailability = "1";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockAvailabilityInvalidDataType()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockAvailability = "ten pounds";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMinMinusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMin()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "a";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMinPlusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "aa";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMaxMinusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "";
+
+            StockDescription = StockDescription.PadRight(199, 'a');
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMax()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "";
+
+            StockDescription = StockDescription.PadRight(200, 'a');
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMaxPlusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "";
+
+            StockDescription = StockDescription.PadRight(201, 'a');
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionMid()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "";
+
+            StockDescription = StockDescription.PadRight(100, 'a');
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockDescriptionExtremeMax()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockDescription = "";
+
+            StockDescription = StockDescription.PadRight(1000, 'a');
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+
+        public void StockPriceExtremeMin()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockPrice = "-100000000";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        public void StockPriceMinMinusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockPrice = "-0.01";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        public void StockPriceMin()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockPrice = "0.00";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        public void StockPriceMinPlusOne()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockPrice = "0.01";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        public void StockPriceInvalidDataType()
+        {
+            clsStock AnStock = new clsStock();
+
+            String Error = "";
+
+            string StockPrice = "This is not a price";
+
+            Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
 
 
     }
