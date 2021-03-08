@@ -85,12 +85,26 @@ namespace ClassLibrary
 
         public bool Find(int customerID)
         {
-            mCustomerID = 21;
-            mCustomerDOB = Convert.ToDateTime("17/05/1999"); 
-            mCustomerPhoneNumber = 07456643218;
-            mCustomerFullName = "Diogo Rodrigues";
-            mEmailSubscription = true;
-            return true; 
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@CustomerID", CustomerID);
+
+            DB.Execute("sproc_tblCustomer_FilterByCustomerID");
+
+            if (DB.Count == 1)
+            {
+                mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+                mCustomerDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["DOB"]);
+                mCustomerPhoneNumber = Convert.ToInt32(DB.DataTable.Rows[0]["07456643218"]);
+                mCustomerFullName = Convert.ToString(DB.DataTable.Rows[0]["Diogo Rodrigues"]);
+                mEmailSubscription= Convert.ToBoolean(DB.DataTable.Rows[0]["EmailSubscriptions"]);
+                return true;
+            }
+             
+            else
+            {
+                return false;
+            }
         }
     }
 }

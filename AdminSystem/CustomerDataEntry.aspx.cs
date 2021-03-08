@@ -24,5 +24,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Response.Redirect("CustomerViewer.aspx"); 
     }
 
-    
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        clsCustomer ACustomer = new clsCustomer();
+
+        Int32 CustomerID;
+
+        Boolean Found = false;
+
+        CustomerID = Convert.ToInt32(txtCustomerID.Text);
+
+        Found = ACustomer.Find(CustomerID);
+
+        if (Found == true)
+        {
+            txtCustomerFN.Text = ACustomer.CustomerFullName.ToString();
+            txtCustomerDOB.Text = ACustomer.CustomerDOB.ToString();
+            txtCustomerPNo.Text = ACustomer.CustomerPhoneNumber.ToString();
+        }
+
+
+    }
 }
