@@ -15,15 +15,35 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnOk_Click(object sender, EventArgs e)
     {
-        clsStock aStock = new clsStock();
+        clsStock AnStock = new clsStock();
 
-        aStock.StockDescription = txtStockDescription.Text;
+        string StockAvailability = txtStockAvailability.Text;
 
-        Session["AStock"] = aStock;
+        string StockDescription = txtStockDescription.Text;
 
+        string StockPrice = txtStockPrice.Text;
 
-    
-        Response.Redirect("StockViewer.aspx");
+        string Error = AnStock.Valid(StockAvailability, StockDescription, StockPrice);
+        
+
+        if(Error == "")
+        {
+            AnStock.StockAvailability = Convert.ToInt32(txtStockAvailability.Text);
+
+            AnStock.StockDescription = txtStockDescription.Text;
+
+            AnStock.StockPrice = Convert.ToDouble(txtStockPrice.Text);
+            
+            Session["AStock"] = AnStock;
+            
+            Response.Redirect("StockViewer.aspx");
+        }
+
+        else
+        {
+            lblError.Text = Error;
+        }
+       
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

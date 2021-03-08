@@ -116,42 +116,42 @@ namespace ClassLibrary
 
                 if(Convert.ToInt32(StockAvailability) < 0)
                 {
-                    Error = Error + "StockAvailability cant be less than 0";
+                    Error = Error + "StockAvailability cant be less than 0 :";
                 }
 
             }catch(FormatException)
             {
-                Error = Error + "StockAvailability must be a number";
+                Error = Error + "StockAvailability must be a number :";
             }
 
 
             if(StockDescription.Length == 0)
             {
-                Error = Error + "StockDescription cant be null";
+                Error = Error + "StockDescription cant be null :";
 
             }
             
             if(StockDescription.Length > 200)
             {
-                Error = Error + "StockDescription length cant be greater than 200";
+                Error = Error + "StockDescription length cant be greater than 200 :";
             }
 
             if(StockPrice.Length == 0)
             {
-                Error = Error + "StockPrice cant be null";
+                Error = Error + "StockPrice cant be null :";
             }
 
             try
             {
                 if (Convert.ToDouble(StockPrice) < 0.00)
                 {
-                    Error = Error = "StockPrice cant be negative";
+                    Error = Error + "StockPrice cant be negative :";
                 }
 
             }
             catch (FormatException)
             {
-                Error = Error + "StockPrice must be a decimal";
+                Error = Error + "StockPrice must be a decimal :";
             }
 
             return Error;
