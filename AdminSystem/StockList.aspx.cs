@@ -30,4 +30,29 @@ public partial class _1_List : System.Web.UI.Page
 
         lstStockList.DataBind();
     }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        Session["StockID"] = -1;
+        Response.Redirect("StockDataEntry.aspx");
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+
+        Int32 StockID;
+
+        if(lstStockList.SelectedIndex != -1)
+        {
+            StockID = Convert.ToInt32(lstStockList.SelectedValue);
+
+            Session["StockID"] = StockID;
+
+            Response.Redirect("StockDataEntry.aspx");
+        }
+        else
+        {
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
 }
