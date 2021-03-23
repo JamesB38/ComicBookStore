@@ -80,7 +80,68 @@ namespace Testing2
 
             Assert.AreEqual(allStock.Count, testList.Count);
         }
-       
+
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            clsStockCollection allStock = new clsStockCollection();
+
+            clsStock testItem = new clsStock();
+
+            Int32 PrimaryKey = 0; 
+
+            testItem.StockID = 1;
+            testItem.StockAvailability = 10;
+            testItem.StockDescription = "Comic Book";
+            testItem.StockPrice = 9.99;
+            testItem.IsBeingRestocked = true;
+
+            allStock.ThisStock = testItem;
+
+            PrimaryKey = allStock.Add();
+
+            testItem.StockID = PrimaryKey;
+
+            allStock.ThisStock.Find(PrimaryKey);
+
+            Assert.AreEqual(allStock.ThisStock, testItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsStockCollection allStock = new clsStockCollection();
+
+            clsStock testItem = new clsStock();
+
+            Int32 PrimaryKey = 0;
+
+            testItem.StockAvailability = 10;
+            testItem.StockDescription = "Comic Book";
+            testItem.StockPrice = 9.99;
+            testItem.IsBeingRestocked = true;
+
+            allStock.ThisStock = testItem;
+
+            PrimaryKey = allStock.Add();
+
+            testItem.StockID = PrimaryKey;
+
+
+            testItem.StockAvailability = 20;
+            testItem.StockDescription = "better comic book";
+            testItem.StockPrice = 13.99;
+            testItem.IsBeingRestocked = false;
+
+            allStock.ThisStock = testItem;
+
+            allStock.Update();
+
+            allStock.ThisStock.Find(PrimaryKey);
+
+            Assert.AreEqual(allStock.ThisStock, testItem);
+        }
+
 
     }
 

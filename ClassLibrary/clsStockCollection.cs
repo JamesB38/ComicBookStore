@@ -11,6 +11,7 @@ namespace ClassLibrary
     {
 
         List<clsStock> mStockList = new List<clsStock>();
+        private clsStock mThisStock = new clsStock();
 
 
         public clsStockCollection()
@@ -38,32 +39,6 @@ namespace ClassLibrary
 
                 Index++;
             }
-
-
-
-
-
-
-
-            /*clsStock testItem = new clsStock();
-
-            testItem.StockID = 1;
-            testItem.StockAvailability = 10;
-            testItem.StockDescription = "Comic Book";
-            testItem.StockPrice = 9.99;
-            testItem.IsBeingRestocked = true;
-
-            mStockList.Add(testItem);
-
-            testItem = new clsStock();
-            testItem.StockID = 2;
-            testItem.StockAvailability = 12;
-            testItem.StockDescription = "Better Comic Book";
-            testItem.StockPrice = 11.99;
-            testItem.IsBeingRestocked = false;
-
-            mStockList.Add(testItem);*/
-
 
         }
 
@@ -95,6 +70,43 @@ namespace ClassLibrary
             }
 
         }
-        public object ThisStock { get; set; }
+        public clsStock ThisStock {
+            get
+            {
+                return mThisStock;
+            }
+            set
+            {
+                mThisStock = value;
+            }
+        }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@StockAvailability", mThisStock.StockAvailability);
+            DB.AddParameter("@StockDescription", mThisStock.StockDescription);
+            DB.AddParameter("@StockPrice", mThisStock.StockPrice);
+            DB.AddParameter("@IsBeingRestocked", mThisStock.IsBeingRestocked);
+
+            return DB.Execute("sproc_tblStock_Insert");
+
+
+        }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@StockID", mThisStock.StockID);
+            DB.AddParameter("@StockAvailability", mThisStock.StockAvailability);
+            DB.AddParameter("@StockDescription", mThisStock.StockDescription);
+            DB.AddParameter("@StockPrice", mThisStock.StockPrice);
+            DB.AddParameter("@IsbeingRestocked", mThisStock.IsBeingRestocked);
+
+            DB.Execute("sproc_tblStock_Update");
+
+        }
     }
 }

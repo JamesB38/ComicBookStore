@@ -8,14 +8,27 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+
+    Int32 StockID;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        StockID = Convert.ToInt32(Session["StockID"]);
+        if (IsPostBack == false)
+        {
+            if (StockID != -1)
+            {
+                DisplayStock();
+            }
+        }
 
     }
 
     protected void btnOk_Click(object sender, EventArgs e)
     {
         clsStock AnStock = new clsStock();
+
+        int StockID = Convert.ToInt32(txtStockID.Text);
 
         string StockAvailability = txtStockAvailability.Text;
 
@@ -28,15 +41,36 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if(Error == "")
         {
-            AnStock.StockAvailability = Convert.ToInt32(txtStockAvailability.Text);
+            AnStock.StockID = StockID;
 
-            AnStock.StockDescription = txtStockDescription.Text;
+            AnStock.StockAvailability = Convert.ToInt32(StockAvailability);
 
-            AnStock.StockPrice = Convert.ToDouble(txtStockPrice.Text);
+            AnStock.StockDescription = StockDescription;
+
+            AnStock.StockPrice = Convert.ToDouble(StockPrice);
+
+            AnStock.IsBeingRestocked = chkIsBeingRestocked.Checked;
+
+            clsStockCollection StockList = new clsStockCollection();
+
+
+            if(StockID == -1)
+            {
+                StockList.ThisStock = AnStock;
+
+                StockList.Add();
+            }
+            else
+            {
+                StockList.ThisStock.Find(StockID);
+
+                StockList.ThisStock = AnStock;
+
+                StockList.Update();
+            }
+
+            Response.Redirect("StockList.aspx");
             
-            Session["AStock"] = AnStock;
-            
-            Response.Redirect("StockViewer.aspx");
         }
 
         else
@@ -66,4 +100,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
      
         }
     }
+
+    void DisplayStock()
+    {
+        clsStockCollection AllStock = new clsStockCollection();
+
+        AllStock.ThisStock.Find(StockID); //ThisStock is null
+
+        txtStockID.Text = AllStock.ThisStock.StockID.ToString();
+        txtStockAvailability.Text = AllStock.ThisStock.StockAvailability.ToString();
+        txtStockDescription.Text = AllStock.ThisStock.StockDescription;
+        txtStockPrice.Text = AllStock.ThisStock.StockPrice.ToString();
+        chkIsBeingRestocked.Checked = AllStock.ThisStock.IsBeingRestocked;
+    }
+
+
 }
