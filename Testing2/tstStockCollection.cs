@@ -9,7 +9,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Testing2
 {
     [TestClass]
-    public class tstStockCollection {
+    public class tstStockCollection
+    {
 
         [TestMethod]
         public void InstanceOK()
@@ -39,14 +40,14 @@ namespace Testing2
 
             Assert.AreEqual(allStock.StockList, testList);
         }
-        
+
 
         [TestMethod]
         public void ThisStockPropertyOK()
         {
             clsStockCollection allStock = new clsStockCollection();
 
-            
+
             clsStock testItem = new clsStock();
 
             testItem.StockID = 1;
@@ -88,7 +89,7 @@ namespace Testing2
 
             clsStock testItem = new clsStock();
 
-            Int32 PrimaryKey = 0; 
+            Int32 PrimaryKey = 0;
 
             testItem.StockID = 1;
             testItem.StockAvailability = 10;
@@ -142,8 +143,81 @@ namespace Testing2
             Assert.AreEqual(allStock.ThisStock, testItem);
         }
 
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsStockCollection allStock = new clsStockCollection();
 
+            clsStock testItem = new clsStock();
+
+            Int32 PrimaryKey = 0;
+
+            testItem.StockAvailability = 10;
+            testItem.StockDescription = "Comic Book";
+            testItem.StockPrice = 9.99;
+            testItem.IsBeingRestocked = true;
+
+            allStock.ThisStock = testItem;
+
+            PrimaryKey = allStock.Add();
+
+            testItem.StockID = PrimaryKey;
+
+            allStock.ThisStock.Find(PrimaryKey);
+
+            allStock.Delete();
+
+            Boolean Found = allStock.ThisStock.Find(PrimaryKey);
+
+            Assert.AreEqual(allStock.ThisStock, testItem);
+        }
+
+
+        [TestMethod]
+
+        public void ReportByDescriptionMethodOk()
+        {
+            
+
+            clsStockCollection FilteredStock = new clsStockCollection();
+
+            FilteredStock.ReportByDescription("");
+
+            Assert.AreEqual(0, FilteredStock.Count);
+
+        }
+
+        [TestMethod]
+        
+        public void ReportByDescriptionTestDataFound()
+        {
+            clsStockCollection FilteredStocks = new clsStockCollection();
+
+            Boolean OK = true;
+
+            FilteredStocks.ReportByDescription("spiderman");
+
+            if(FilteredStocks.Count == 2)
+            {
+                if(FilteredStocks.StockList[0].StockID != 41)
+                {
+                    OK = false;
+                }
+
+                if(FilteredStocks.StockList[1].StockID != 42)
+                {
+                    OK = false;
+                }
+
+            }
+            else
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+            
+        }
     }
-
     
 }

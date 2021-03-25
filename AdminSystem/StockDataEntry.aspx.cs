@@ -105,7 +105,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsStockCollection AllStock = new clsStockCollection();
 
-        AllStock.ThisStock.Find(StockID); //ThisStock is null
+        AllStock.ThisStock.Find(StockID);
 
         txtStockID.Text = AllStock.ThisStock.StockID.ToString();
         txtStockAvailability.Text = AllStock.ThisStock.StockAvailability.ToString();

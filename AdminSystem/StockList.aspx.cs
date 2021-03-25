@@ -55,4 +55,48 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Text = "Please select a record to delete from the list";
         }
     }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        Int32 StockID;
+
+        if(lstStockList.SelectedIndex != -1) //if something has been selected
+        {
+            StockID = Convert.ToInt32(lstStockList.SelectedValue);
+
+            Session["StockID"] = StockID;
+
+            Response.Redirect("DeleteStock.aspx");
+
+        }
+        else
+        {
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        clsStockCollection Stocks = new clsStockCollection();
+
+        Stocks.ReportByDescription(txtDescription.Text);
+        lstStockList.DataSource = Stocks.StockList;
+        lstStockList.DataValueField = "StockID";
+        lstStockList.DataTextField = "StockDescription";
+        lstStockList.DataBind();
+
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        clsStockCollection Stocks = new clsStockCollection();
+
+        Stocks.ReportByDescription("");
+
+        lstStockList.DataSource = Stocks.StockList;
+        lstStockList.DataValueField = "StockID";
+        lstStockList.DataTextField = "StockDescription";
+        lstStockList.DataBind();
+
+    }
 }

@@ -15,30 +15,12 @@ namespace ClassLibrary
 
 
         public clsStockCollection()
-        {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
-
+        { 
             clsDataConnection DB = new clsDataConnection();
 
             DB.Execute("sproc_tblStock_SelectAll");
 
-            RecordCount = DB.Count;
-
-            while(Index < RecordCount)
-            {
-                clsStock AnStock = new clsStock();
-
-                AnStock.StockID = Convert.ToInt32(DB.DataTable.Rows[Index]["StockID"]);
-                AnStock.StockAvailability = Convert.ToInt32(DB.DataTable.Rows[Index]["StockAvailability"]);
-                AnStock.StockDescription = Convert.ToString(DB.DataTable.Rows[Index]["StockDescription"]);
-                AnStock.StockPrice = Convert.ToDouble(DB.DataTable.Rows[Index]["StockPrice"]);
-                AnStock.IsBeingRestocked = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsBeingRestocked"]);
-
-                mStockList.Add(AnStock);
-
-                Index++;
-            }
+            PopulateArray(DB);
 
         }
 
@@ -106,6 +88,57 @@ namespace ClassLibrary
             DB.AddParameter("@IsbeingRestocked", mThisStock.IsBeingRestocked);
 
             DB.Execute("sproc_tblStock_Update");
+
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@StockID", mThisStock.StockID);
+
+            DB.Execute("sproc_tblStock_Delete");
+            
+        }
+
+        public void ReportByDescription(string Description)
+        {
+
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@Description", Description);
+
+            DB.Execute("sproc_tblStock_FilterByDescription");
+
+            PopulateArray(DB);
+
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+
+            Int32 Index = 0;
+
+            Int32 RecordCount;
+
+            RecordCount = DB.Count;
+
+            mStockList = new List<clsStock>();
+
+            while(Index < RecordCount)
+            {
+                clsStock AnStock = new clsStock();
+
+                AnStock.StockID = Convert.ToInt32(DB.DataTable.Rows[Index]["StockID"]);
+                AnStock.StockAvailability = Convert.ToInt32(DB.DataTable.Rows[Index]["StockAvailability"]);
+                AnStock.StockDescription = Convert.ToString(DB.DataTable.Rows[Index]["StockDescription"]);
+                AnStock.StockPrice = Convert.ToDouble(DB.DataTable.Rows[Index]["StockPrice"]);
+                AnStock.IsBeingRestocked = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsBeingRestocked"]);
+
+                mStockList.Add(AnStock);
+
+                Index++;
+            }
 
         }
     }
