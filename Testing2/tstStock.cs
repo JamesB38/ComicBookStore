@@ -89,7 +89,7 @@ namespace Testing2
 
             Boolean Found = true;
 
-            Int32 StockID = 2;
+            Int32 StockID = 1;
 
             Found = AnStock.Find(StockID);
 
