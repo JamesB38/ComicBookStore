@@ -94,10 +94,10 @@ namespace ClassLibrary
             if (DB.Count == 1)
             {
                 mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
-                mCustomerDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["DOB"]);
-                mCustomerPhoneNumber = Convert.ToInt32(DB.DataTable.Rows[0]["07456643218"]);
-                mCustomerFullName = Convert.ToString(DB.DataTable.Rows[0]["Diogo Rodrigues"]);
-                mEmailSubscription= Convert.ToBoolean(DB.DataTable.Rows[0]["EmailSubscriptions"]);
+                mCustomerDOB = Convert.ToDateTime(DB.DataTable.Rows[0]["CustomerDOB"]);
+                mCustomerPhoneNumber = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerPhoneNo"]);
+                mCustomerFullName = Convert.ToString(DB.DataTable.Rows[0]["CustomerFullName"]);
+                mEmailSubscription= Convert.ToBoolean(DB.DataTable.Rows[0]["EmailSubscription"]);
                 return true;
             }
              
