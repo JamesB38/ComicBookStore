@@ -83,7 +83,7 @@ namespace Testing1
 
             Boolean Found = false;
 
-            Int32 CustomerID = 2;
+            Int32 CustomerID = 1;
 
             Found = ACustomer.Find(CustomerID);
 
